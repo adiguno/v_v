@@ -33,4 +33,5 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
     - change `angular.json`: `"outputPath": "docs/"`
 - build with base URL to `https://username.github.io/respositoryname`   
   - `ng build --prod --baseHref=”https://adiguno.github.io/v_v/”`
+- or use `ng add angular-cli-ghpages`
 
