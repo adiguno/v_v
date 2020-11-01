@@ -27,6 +27,10 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
 
 ## Notes
+### Publishing to GitHub Pages
 - deployable code generated in `dist/project_name1` by default
   - needs to be generated in `docs` folder, under the app folder
-   - change `angular.json`: `"outputPath": "docs/"`
+    - change `angular.json`: `"outputPath": "docs/"`
+- build with base URL to `https://username.github.io/respositoryname`   
+  - `ng build --prod --baseHref=”https://adiguno.github.io/v_v/”`
+
