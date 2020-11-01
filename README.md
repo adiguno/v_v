@@ -27,16 +27,31 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
 
 ## Notes
+
 ### 'Manually' Publishing to GitHub Pages
 - deployable code generated in `dist/project_name1` by default
   - needs to be generated in `docs` folder, under the app folder
     - change `angular.json`: `"outputPath": "docs/"`
 - build with base URL to `https://username.github.io/respositoryname`   
   - `ng build --prod --baseHref=”https://adiguno.github.io/v_v/”`
-### 'Automagically"
+
+### 'Automagically" Publishing to GitHub Pages
 - `ng add angular-cli-ghpages`
 - `ng deploy --base-href=/v_v/` project name
-### loading images
+
+### Loading images
 - use `assets/{resource}`, no slash before 'assets'
 
+### Adding Bottstrap
+  1. using npm `npm install bootstrap`
+     - updated `package.json`
+     - installed in `node_modules/bootstrap`
+     - jQuery also needs to be installed `npm install jquery`
+  2. add bootstrap to `angular.json`
+     - node_modules/bootstrap/dist/css/bootstrap.css in the projects->architect->build->styles array,  
+     - node_modules/bootstrap/dist/js/bootstrap.js in the projects->architect->build->scripts array,  
+     - node_modules/bootstrap/dist/js/bootstrap.js in the projects->architect->build->scripts array,
+     - also need to add the jquery js lib file
 
+### Quickly restructure JSON
+ - `shift + option + f`
