@@ -55,3 +55,13 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 ### Quickly restructure JSON
  - `shift + option + f`
+
+ ### Angular Material
+- ![error](angular-material-error.png)
+  - add 
+    `{
+      "scripts": {
+        "postinstall": "ngcc"
+      }
+    }`
+    to `package.json` to fix [comptability issue](https://stackoverflow.com/questions/61079125/mattoolbar-throws-error-when-using-it-with-angular-9)
