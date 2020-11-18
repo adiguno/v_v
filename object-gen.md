@@ -77,6 +77,40 @@ class Structure_Generator(nn.Module):
     - Output: depth images (2D projections) at novel viewpoints
     - **Notes**: kinda like upscaling? point of failure? more loss functions to consider...
 
+## **Training Dynamic**
+![alt text](https://miro.medium.com/max/2000/1*iG5kzvOO7sqQ_Yh2UDJEsw.png)
+- trick: fusion + pseudo-rendering modules are made purely differentiable, geometric reasoning
+- geometric algebra means no learnable parameters
+    - make the model size smaller and easy to train
+- differentiable = we can bac-propagate the gradient through it
+    - making possible to use the loss from a 2D projection, to learn a 3D point cloud
+```
+# --------- Pytorch pseudo-code for training loop ----------#
+# Create 2D Conv Structure generator
+model = Structure_Generator()
+# only need to learn the 2D structure optimizer
+optimizer = optim.SGD(model.parameters())
+# 2D projections from predetermined viewpoints
+XYZ, maskLogit = model(RGB_images)
+# fused point cloud
+#fuseTrans is predetermined viewpoints info
+XYZid, ML = fuse3D(XYZ, maskLogit, fuseTrans)
+# Render new depth images at novel viewpoints
+# renderTrans is novel viewpoints info
+newDepth, newMaskLogit, collision = render2D(XYZid, ML, renderTrans)
+# Compute loss between novel view and ground truth
+loss_depth = L1Loss()(newDepth, GTDepth)
+loss_mask = BCEWithLogitLoss()(newMaskLogit, GTMask)
+loss_total = loss_depth + loss_mask
+# Back-propagation to update Structure Generator
+loss_total.backward()
+optimizer.step()
+```
+
+### **Final Notes**
+![alt text](https://miro.medium.com/max/1158/1*4peGy77pUfQlgwRo1tYp1g.gif)
+- with point cloud representation, you can use [MeshLab](https://www.meshlab.net/) to convert to something 3D printable
+
 ## References
 
 [pytorch single image 3d reconstruction](https://medium.com/vitalify-asia/create-3d-model-from-a-single-2d-image-in-pytorch-917aca00bb07)
